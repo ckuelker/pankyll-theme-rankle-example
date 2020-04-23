@@ -11,6 +11,7 @@
 # |     - fix sub module update                                               |
 # |     - fix makefile version                                                |
 # |     - add submodule clean target                                          |
+# |     - add submodule-pull target                                           |
 # |                                                                           |
 # | 0.1.1 2020-03-29 Christian Külker <c@c8i.org>                             |
 # |     - capture pankyll output: pankyll.err, pankyll.out, pankyll.log       |
@@ -104,6 +105,10 @@ submodule-update:
 	git submodule update --init --recursive --jobs $(NPROC)
 	cd themes/pankyll-theme-rankle && git submodule update --remote
 	cd themes/pankyll-theme-rankle && git submodule update --init --recursive --jobs $(NPROC)
+submodule-pull:
+	cd pandoc && git pull
+	cd content && git pull
+	cd themes/pankyll-theme-rankle && git pull
 server:
 	@echo "$(L)\nhttp://localhost:$(PORT)\n$(L)"
 	cd public && python3 -m http.server $(PORT)
