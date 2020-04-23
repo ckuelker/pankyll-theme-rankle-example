@@ -3,9 +3,13 @@
 # |                                                                           |
 # | This is the Pankyll configuration for the project site.                   |
 # |                                                                           |
-# | Version: 0.1.0                                                            |
+# | Version: 0.1.1                                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.1 2020-04-23 Christian Külker <c@c8i.org>                             |
+# |     - change pdf_create to True                                           |
+# |     - fix comments, typos                                                 |
 # |                                                                           |
 # | 0.1.0 2020-03-29 Christian Külker <c@c8i.org>                             |
 # |     - initial release                                                     |
@@ -18,7 +22,7 @@ default:
     keyword_page_type: keyword
     index_list_type:   list
     l10n_locale:       en_US   # Feature 2: Localization
-    pdf_create:        False
+    pdf_create:        True
 
 # 1. Global site parameters
 site:
@@ -42,7 +46,6 @@ locales:
 #    imprint:
 #        url:
 #        text:
-#        dir:
 # 3. Feature: Imprint
 imprint:
     en_US:
@@ -101,7 +104,7 @@ toc:
 # keywords: let pages define classes of keywords usually this is 'categories'
 #           and 'tags' but also others can be defined. If one class is added
 #           in this list, also a YAML section with the same name need to be
-#           added that defines 'text' and 'url' in all suported locales.
+#           added that defines 'text' and 'url' in all supported locales.
 keywords:
     - categories
     - tags
@@ -153,33 +156,33 @@ description:
 footer_left:
     en_US:
         1:
-            tip: Mailinglist
-            font: fa # fontawesome solid
+            tip: Mailing List
+            font: fa # font awesome solid
             icon: envelope
             url:  https://example.org/mail
         2:
             tip: Twitter
-            font: fab # fontawesome brands
+            font: fab # font awesome brands
             icon: twitter
             url:  https://example.org/mail
         3:
-            tip:  Stackoverflow
+            tip:  Stack Overflow
             font: fab
             icon: stack-overflow
             url:  https://example.org/mail
     de_DE:
         1:
             tip: E-Mail-Liste
-            font: fa # fontawesome solid
+            font: fa # font awesome solid
             icon: envelope
             url:  https://example.org/mail
         2:
             tip: Twitter
-            font: fab # fontawesome brands
+            font: fab # font awesome brands
             icon: twitter
             url:  https://example.org/mail
         3:
-            tip:  Stackoverflow
+            tip:  Stack Overflow
             font: fab
             icon: stack-overflow
             url:  https://example.org/mail
