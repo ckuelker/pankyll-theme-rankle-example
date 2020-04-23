@@ -1,0 +1,12 @@
+[submodule "themes/pankyll-theme-rankle"]
+	path = themes/pankyll-theme-rankle
+	url = https://github.com/ckuelker/pankyll-theme-rankle.git
+	branch = master
+[submodule "pandoc"]
+	path = pandoc
+	url = https://github.com/ckuelker/pankyll-pandoc.git
+	branch = master
+[submodule "content"]
+	path = content
+	url = https://github.com/ckuelker/pankyll-documentation.git
+	branch = master

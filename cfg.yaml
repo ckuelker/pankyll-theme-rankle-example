@@ -1,0 +1,251 @@
+# +---------------------------------------------------------------------------+
+# | cfg.yaml                                                                  |
+# |                                                                           |
+# | This is the Pankyll configuration for the project site.                   |
+# |                                                                           |
+# | Version: 0.1.0                                                            |
+# |                                                                           |
+# | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.0 2020-03-29 Christian Külker <c@c8i.org>                             |
+# |     - initial release                                                     |
+# |                                                                           |
+# +---------------------------------------------------------------------------+
+#
+# 0: default values
+default:
+    page_type:         doc
+    keyword_page_type: keyword
+    index_list_type:   list
+    l10n_locale:       en_US   # Feature 2: Localization
+    pdf_create:        False
+
+# 1. Global site parameters
+site:
+  url:         /                     # URL prefix - mandatory (trailing slash)
+  title:       Pankyll               # string     - mandatory (fallback)
+  content_dir: content               # directory  - mandatory
+  public_dir:  public                # directory  - mandatory
+  themes_dir:  themes                # directory  - mandatory
+  theme_name:  pankyll-theme-rankle  # directory  - mandatory
+
+# 2. Feature: Internationalization
+#    at minimum you have do define 1 language (the default)
+locales:
+      en_US: English
+#      de_DE: Deutsch
+
+# URLs:
+# - should be relative (no leading slash)
+# - should have no trailing slash)
+#en_US:
+#    imprint:
+#        url:
+#        text:
+#        dir:
+# 3. Feature: Imprint
+imprint:
+    en_US:
+      url:   en_US/Imprint
+      text:  Imprint
+    de_DE:
+      url:   de_DE/Imprint
+      text:  Impressum
+
+# 4. Feature: Home
+home:
+    en_US:
+        text: Pankyll  # home_text
+        url:  en_US    # home_url
+    de_DE:
+        text: Pankyll
+        url:  de_DE
+
+# 5. Feature: Navigation
+navigation:
+    en_US:
+        - link:
+            text: About
+            url:  en_US/About
+        - link:
+            text: Documentation
+            url:  en_US/Documentation
+        - link:
+            text: Pankyll Themes
+            url:  en_US/Pankyll-Themes
+        - link:
+            text: Example Sites
+            url:  en_US/Example-Sites
+    de_DE:
+        - link:
+            text: Über
+            url:  de_DE/About
+        - link:
+            text: Dokumentation
+            url:  de_DE/Documentation
+        - link:
+            text: Pankyll Layouts (Themes)
+            url:  de_DE/Pankyll-Themes
+        - link:
+            text: Beispiel Seiten
+            url:  de_DE/Example-Sites
+
+# 6. Feature: Table Of Contents
+toc:
+    en_US:
+        text: Table Of Contents # alternative: Contents
+    de_DE:
+        text: Inhalt
+
+# 7. Feature: Keywords
+# keywords: let pages define classes of keywords usually this is 'categories'
+#           and 'tags' but also others can be defined. If one class is added
+#           in this list, also a YAML section with the same name need to be
+#           added that defines 'text' and 'url' in all suported locales.
+keywords:
+    - categories
+    - tags
+
+categories:
+    en_US:
+        text: Categories
+        url:  en_US/Categories/
+    de_DE:
+        text: Kategorien
+        url:  de_DE/Categories/
+
+tags:
+    en_US:
+        text: Tags
+        url:  en_US/Tags/
+    de_DE:
+        text: Stichworte
+        url:  de_DE/Tags/
+
+# 8. Feature: More-Menu (not used by newspaper theme)
+more:
+    en_US:
+        - link:
+            text: Categories
+            url:  en_US/Categories/
+        - link:
+            text: Tags
+            url:  en_US/Tags/
+    de_DE:
+        - link:
+            text: Kategorien
+            url:  de_DE/Categories/
+        - link:
+            text: Stichworte
+            url:  de_DE/Tags/
+
+# 9.  Feature: Site Description
+description:
+    en_US:
+        text: Pankyll Documentation
+    de_DE:
+        text: Pankyll Dokumentation
+
+# 10. Feature: Footer
+# fas https://fontawesome.com/cheatsheet/free/solid
+# far https://fontawesome.com/cheatsheet/free/regular
+# fab https://fontawesome.com/cheatsheet/free/brands
+footer_left:
+    en_US:
+        1:
+            tip: Mailinglist
+            font: fa # fontawesome solid
+            icon: envelope
+            url:  https://example.org/mail
+        2:
+            tip: Twitter
+            font: fab # fontawesome brands
+            icon: twitter
+            url:  https://example.org/mail
+        3:
+            tip:  Stackoverflow
+            font: fab
+            icon: stack-overflow
+            url:  https://example.org/mail
+    de_DE:
+        1:
+            tip: E-Mail-Liste
+            font: fa # fontawesome solid
+            icon: envelope
+            url:  https://example.org/mail
+        2:
+            tip: Twitter
+            font: fab # fontawesome brands
+            icon: twitter
+            url:  https://example.org/mail
+        3:
+            tip:  Stackoverflow
+            font: fab
+            icon: stack-overflow
+            url:  https://example.org/mail
+footer_middle:
+    en_US:
+        1:
+            tip:  Pankyll
+            font: fab
+            icon: python
+            url:  https://github.com/ckuelker/pankyll
+        2:
+            tip:  Rankle
+            font: fab
+            icon: html5
+            url:  https://github.com/ckuelker/pankyll-theme-rankle
+        3:
+            tip:  Example
+            font: fab
+            icon: git-alt
+            url:  https://github.com/ckuelker/pankyll-theme-rankle-example
+        4:
+            tip:  Developer
+            font: fa
+            icon: user-circle
+            url:  https://github.com/ckuelker
+    de_DE:
+        1:
+            tip:  Pankyll
+            font: fab
+            icon: python
+            url:  https://github.com/ckuelker/pankyll
+        2:
+            tip:  Rankle
+            font: fab
+            icon: html5
+            url:  https://github.com/ckuelker/pankyll-theme-rankle
+        3:
+            tip:  Beispiel
+            font: fab
+            icon: git-alt
+            url:  https://github.com/ckuelker/pankyll-theme-rankle-example
+        4:
+            tip:  Entwickler
+            font: fa
+            icon: user-circle
+            url:  https://github.com/ckuelker
+
+footer_right:
+    en_US:
+        1:
+            tip: Git Home # Rankle: tooltips
+            font: fab
+            icon: github
+            url:  https://github.com/ckuelker/pankyll-theme-rankle-example
+    de_DE:
+        1:
+            tip: Git Startseite
+            font: fab
+            icon: github
+            url:  https://github.com/ckuelker/pankyll-theme-rankle-example
+footer:
+    en_US:
+        - text: © 2020 Christian Külker, All Rights Reserved
+        - text: 'Content license: <a class="rankle-link-dark" href="/en_US/License">GNU Free Document License v1.3</a>'
+    de_DE:
+        - text: © 2020 Christian Külker, alle Rechte vorbehalten
+        - text: 'Inhaltslizenz: <a class="rankle-link-dark" href="/en_US/License">GNU Free Document License v1.3</a>'
+
+

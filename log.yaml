@@ -1,0 +1,28 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  medium:
+    format: '%(asctime)s|%(filename)s::%(funcName)s<%(lineno)s>: %(message)s'
+  warning:
+    format: '%(levelname)s: %(message)s %(filename)s::%(funcName)s<%(lineno)s> at %(asctime)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: WARNING
+    formatter: warning
+    stream: ext://sys.stderr
+  file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    filename: pankyll.log
+    formatter: medium
+loggers:
+  pankyll:
+    level: DEBUG
+    handlers: [file,console]
+    propagate: no
+# NOTSET->DEBUG->INFO->WARNING->ERROR->CRITICAL
+root:
+  level: DEBUG
+  handlers: [file,console]
