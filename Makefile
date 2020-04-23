@@ -3,9 +3,13 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.0 (change inline)                                            |
+# | Version: 0.1.2 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.2 2020-04-23 Christian Külker <c@c8i.org>                             |
+# |     - fix sub module update                                               |
+# |     - fix makefile version                                                |
 # |                                                                           |
 # | 0.1.1 2020-03-29 Christian Külker <c@c8i.org>                             |
 # |     - capture pankyll output: pankyll.err, pankyll.out, pankyll.log       |
@@ -90,8 +94,8 @@ repository-update:
 submodule-update:
 	git submodule update --remote
 	git submodule update --init --recursive --jobs $(NPROC)
-	cd themes/pankyll-theme-newspaper && git submodule update --remote
-	cd themes/pankyll-theme-newspaper && git submodule update --init --recursive --jobs $(NPROC)
+	cd themes/pankyll-theme-rankle && git submodule update --remote
+	cd themes/pankyll-theme-rankle && git submodule update --init --recursive --jobs $(NPROC)
 server:
 	@echo "$(L)\nhttp://localhost:$(PORT)\n$(L)"
 	cd public && python3 -m http.server $(PORT)
