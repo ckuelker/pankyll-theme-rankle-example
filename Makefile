@@ -10,6 +10,7 @@
 # | 0.1.2 2020-04-23 Christian Külker <c@c8i.org>                             |
 # |     - fix sub module update                                               |
 # |     - fix makefile version                                                |
+# |     - add submodule clean target                                          |
 # |                                                                           |
 # | 0.1.1 2020-03-29 Christian Külker <c@c8i.org>                             |
 # |     - capture pankyll output: pankyll.err, pankyll.out, pankyll.log       |
@@ -45,10 +46,12 @@ usage:
 	@echo "make usage            : this information"
 	@echo "make info             : print more info"
 	@echo "make clean            : remove porcess files"
-	@echo "make realclean        : remove target"
 	@echo "make markdownclean    : remove all *.md from target (debug)"
 	@echo "make htmlclean        : remove all *.html from target (debug)"
 	@echo "make pdfclean         : remove all *.pdf from target (debug)"
+	@echo "make submoduleclean   : remove all changes from content, pandoc"
+	@echo "                        and themes/pankyll-theme-rankle"
+	@echo "make realclean        : remove target"
 	@echo "make submodule-update : update git sub-modules"
 	@echo "make build            : build project"
 	@echo "make server           : start a development server on port 8000"
@@ -72,6 +75,11 @@ publicclean:
 # clean process files
 clean:
 	rm -f pankyll.log pankyll.err pankyll.out
+# the make the submodule clean: WARNING changes will be lost
+submoduleclean:
+	cd pandoc && git checkout master
+	cd content && git checkout master
+	cd themes/pankyll-theme-rankle && git checkout master
 # clean build target
 realclean: clean publicclean
 test:
@@ -107,6 +115,4 @@ linkcheck-local-extern:
 	@echo "Check local and remote links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker --check-extern $(LINKCHECK_PARAMS)
 	@echo "Links PASS"
-
-
 
