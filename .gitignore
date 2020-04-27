@@ -1,2 +1,6 @@
+pankyll.err
+pankyll.log
+pankyll.out
+public/
 *.swp
 *~
