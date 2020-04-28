@@ -12,6 +12,7 @@
 # |     - read configuration partly from cfg.yaml                             |
 # |     - build example root index.html                                       |
 # |     - server target supports URL prefix                                   |
+# |     - fix URL for root index.html for prefix /                            |
 # |                                                                           |
 # | 0.1.2 2020-04-23 Christian Külker <c@c8i.org>                             |
 # |     - fix sub module update                                               |
@@ -118,6 +119,7 @@ build: static $(DSTD)
 	@echo $(L)
 	@cat pankyll.err
 	sed -i -e 's%=/en_US/index.html%=$(PFX)/$(LOC)/index.html%' $(DSTD)/index.html
+	sed -i -e 's%=//en_US/index.html%=//en_US/index.html%' $(DSTD)/index.html
 repository-update:
 	git pull
 submodule-update:
