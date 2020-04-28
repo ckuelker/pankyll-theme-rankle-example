@@ -3,9 +3,15 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.2 (change inline)                                            |
+# | Version: 0.1.3 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.3 2020-04-28 Christian Külker <c@c8i.org>                             |
+# |     - add more phony targets                                              |
+# |     - read configuration partly from cfg.yaml                             |
+# |     - build example root index.html                                       |
+# |     - server target supports URL prefix                                   |
 # |                                                                           |
 # | 0.1.2 2020-04-23 Christian Külker <c@c8i.org>                             |
 # |     - fix sub module update                                               |
@@ -23,15 +29,21 @@
 # +---------------------------------------------------------------------------+
 #
 # Makefile version
-VERSION=0.1.0
+VERSION=0.1.3
 PORT=8001
+NS=pankyll-theme-rankle-example
 # -----------------------------------------------------------------------------
 # NO CHANGES BEYOND THIS POINT
 ifndef VERSION
 $(error VERSION is NOT defined)
 endif
-DSTD=public
+HOST=$(shell hostname)
+DSTD=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['site']['public_dir'])")
+PFX=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['site']['url'])")
+LOC=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['default']['l10n_locale'])")
+PFXDIR=$(shell echo "$(PFX)"|sed -e 's%^/%%')
 NPROC=$(shell nproc)
+WDIR=$(shell echo $(DSTD) $(PFXDIR)|tr ' ' '/') # public | public/PFXDIR
 DEBUG_PRINT='1[$@]2[$%]3[$<]4[$?]5[$^]6[$+]7[$|]8[$*]9[$(@D)]10[$(@F)]11[$(*D)]\n12[$(*F)]13[$(%D)]14[$(%F)]15[$(<D)]16[$(<F)]17[$(^D)]18[$(^F)]\n19[$(+D)]20[$(+F)]21[$(?D)]22[$(?F)]\n'
 # /webfonts/fa-regular-400 requested by all.min.css but not provided
 LINKCHECK_IGNORE:=/webfonts/fa-regular-400
@@ -39,7 +51,7 @@ LINKCHECK_SERVER:=http://localhost:$(PORT)
 LINKCHECK_PARAMS:=--no-status --ignore-url=$(LINKCHECK_IGNORE) -o blacklist $(LINKCHECK_SERVER)
 L:=============================================================================
 .PHONY: build clean htmlclean info markdownclean pdfclean realclean server \
-	submodule-update test usage
+	submodule-update test usage submoduleclean submodule-pull
 usage:
 	@echo "$(L)"
 	@echo "USAGE:"
@@ -53,13 +65,20 @@ usage:
 	@echo "make submoduleclean   : remove all changes from content, pandoc"
 	@echo "                        and themes/pankyll-theme-rankle"
 	@echo "make realclean        : remove target"
-	@echo "make submodule-update : update git sub-modules"
+	@echo "make submodule-update : update git sub-modules configuration"
+	@echo "make submodule-pull   : get latest git sub-module update"
 	@echo "make build            : build project"
 	@echo "make server           : start a development server on port 8000"
 info:
+	@echo "NS     : [$(NS)]"
 	@echo "VERSION: [$(VERSION)]"
+	@echo "LOC    : [$(LOC)]"
 	@echo "DSTD   : [$(DSTD)]"
+	@echo "PFX    : [$(PFX)]"
+	@echo "PFXDIR : [$(PFXDIR)]"
+	@echo "WDIR   : [$(WDIR)]"
 	@echo "NPROC  : [$(NPROC)]"
+	@echo "HOST   : [$(HOST)]"
 	git submodule status --recursive
 # for development (might remove too much or too less files for a clean build)
 markdownclean:
@@ -98,6 +117,7 @@ build: static $(DSTD)
 	@echo "running pankyll - finished"
 	@echo $(L)
 	@cat pankyll.err
+	sed -i -e 's%=/en_US/index.html%=$(PFX)/$(LOC)/index.html%' $(DSTD)/index.html
 repository-update:
 	git pull
 submodule-update:
@@ -110,8 +130,19 @@ submodule-pull:
 	cd content && git pull
 	cd themes/pankyll-theme-rankle && git pull
 server:
-	@echo "$(L)\nhttp://localhost:$(PORT)\n$(L)"
-	cd public && python3 -m http.server $(PORT)
+	@if [ "$(PFX)" = "/" ]; then \
+	    echo "$(L)\nhttp://localhost:$(PORT)\nhttp://${HOST}:$(PORT)\n$(L)"; \
+	else \
+	    echo "$(L)\nhttp://localhost:$(PORT)/$(PFXDIR)\nhttp://${HOST}:$(PORT)/$(PFXDIR)\n$(L)"; \
+	fi
+	@if [ "$(PFX)" = "/" ]; then \
+	    python3 -m http.server -d $(DSTD) $(PORT);\
+	else \
+	    if [ -d /tmp/$(NS) ]; then rm -rf /tmp/$(NS) ]; fi; \
+	    mkdir -p /tmp/$(NS)/$(WDIR);\
+	    cp -a public/* /tmp/$(NS)/$(WDIR);\
+	    cd /tmp/$(NS)/$(DSTD) && python3 -m http.server $(PORT);\
+	fi
 linkcheck-local:
 	@echo "Check local links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker $(LINKCHECK_PARAMS)
