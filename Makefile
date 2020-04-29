@@ -3,9 +3,13 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.3 (change inline)                                            |
+# | Version: 0.1.4 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.4 2020-04-29 Christian Külker <c@c8i.org>                             |
+# |     - fix server target for simple url prefix                             |
+# |     - fix build index.html for simple url prefix                          |
 # |                                                                           |
 # | 0.1.3 2020-04-28 Christian Külker <c@c8i.org>                             |
 # |     - add more phony targets                                              |
@@ -119,7 +123,7 @@ build: static $(DSTD)
 	@echo $(L)
 	@cat pankyll.err
 	sed -i -e 's%=/en_US/index.html%=$(PFX)/$(LOC)/index.html%' $(DSTD)/index.html
-	sed -i -e 's%=//en_US/index.html%=//en_US/index.html%' $(DSTD)/index.html
+	sed -i -e 's%=//en_US/index.html%=/$(LOC)/index.html%' $(DSTD)/index.html
 repository-update:
 	git pull
 submodule-update:
@@ -138,7 +142,7 @@ server:
 	    echo "$(L)\nhttp://localhost:$(PORT)/$(PFXDIR)\nhttp://${HOST}:$(PORT)/$(PFXDIR)\n$(L)"; \
 	fi
 	@if [ "$(PFX)" = "/" ]; then \
-	    python3 -m http.server -d $(DSTD) $(PORT);\
+	    cd $(DSTD) && python3 -m http.server $(PORT);\
 	else \
 	    if [ -d /tmp/$(NS) ]; then rm -rf /tmp/$(NS) ]; fi; \
 	    mkdir -p /tmp/$(NS)/$(WDIR);\
