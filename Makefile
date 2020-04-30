@@ -3,9 +3,12 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.4 (change inline)                                            |
+# | Version: 0.1.5 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.5 2020-04-30 Christian Külker <c@c8i.org>                             |
+# |     - use PORT variable in usage (fixes wrong value)                      |
 # |                                                                           |
 # | 0.1.4 2020-04-29 Christian Külker <c@c8i.org>                             |
 # |     - fix server target for simple url prefix                             |
@@ -34,7 +37,7 @@
 # +---------------------------------------------------------------------------+
 #
 # Makefile version
-VERSION=0.1.3
+VERSION=0.1.5
 PORT=8001
 NS=pankyll-theme-rankle-example
 # -----------------------------------------------------------------------------
@@ -73,7 +76,7 @@ usage:
 	@echo "make submodule-update : update git sub-modules configuration"
 	@echo "make submodule-pull   : get latest git sub-module update"
 	@echo "make build            : build project"
-	@echo "make server           : start a development server on port 8000"
+	@echo "make server           : start a development server on port $(PORT)"
 info:
 	@echo "NS     : [$(NS)]"
 	@echo "VERSION: [$(VERSION)]"
