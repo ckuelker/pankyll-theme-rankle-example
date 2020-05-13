@@ -1,7 +1,7 @@
 ---
 title:  pankyll-theme-rankle-example/README.md
 author: Christian Külker
-date:   2020-03-29
+date:   2020-05-13
 
 ---
 
@@ -23,34 +23,43 @@ new site.
 
 | Version | Date       | Author           | Notes                             |
 | ------- | ---------- | ---------------- | --------------------------------- |
+| 0.1.1   | 2020-05-13 | Christian Külker | Makefile, Readme, Features        |
 | 0.1.0   | 2020-03-29 | Christian Külker | Initial release                   |
 
 # Introduction
 
 More than a 1000 words, a life example can show how things are done the right
-away. This [Pankyll] theme rankle example is a pre-configured [Pankyll]
-theme with a little bit of content to see how easy it is to set up a
-[Pankyll] site with a rankle theme.
+away. This [Pankyll] theme rankle example is a pre-configured [Pankyll] theme
+with a little bit of content to see how easy it is to set up a [Pankyll] site
+with a rankle theme.
 
 # Prerequisites
 
 **TLTR:**
 
-Requires [Pankyll](https://github.com/ckuelker/pankyll/) and for [Debian] install
-the following:
+Requires [Pankyll](https://github.com/ckuelker/pankyll/) and for [Debian]
+install the following:
 
-```bash
-aptitude install pandoc fonts-noto-cjk fonts-wqy-microhei make
-git clone --recursive https://github.com/ckuelker/pankyll-theme-rankle-example.git
+As root
+
+```shell
+# aptitude install pandoc fonts-noto-cjk fonts-wqy-microhei make
 ```
 
-## Pankyll 
+As user
+
+```shell
+$ export URL=https://github.com/ckuelker/pankyll-theme-rankle-example.git
+$ git clone --recursive $URL
+```
+
+## Pankyll
 
 We assume that [Pankyll] is installed and that the script `pankyll` is in your
 `PATH`. Read the [Pankyll] [README.md](https://github.com/ckuelker/pankyll/)
 for more information.
 
-## Pandoc 
+## Pandoc
 
 [Pandoc] is expected to be installed. While it is possible to run `pankyll`
 with `pandoc` 1.x.x it will not produce good results. [Pankyll] was tested
@@ -58,8 +67,8 @@ with version 2.2.1 and should give good results.
 
 **Installation for Debian:**
 
-```bash
-aptitude install pandoc
+```shell
+# aptitude install pandoc
 ```
 
 ## Fonts
@@ -72,14 +81,13 @@ future releases.
 * Noto Sans Mono CJK JP Bold
 * WenQuanYi Micro Hei Mono
 
-
 **Installation for Debian:**
 
-```bash
-aptitude install fonts-noto-cjk fonts-wqy-microhei
+```shell
+# aptitude install fonts-noto-cjk fonts-wqy-microhei
 ```
 
-## Make 
+## Make
 
 An optional control file (Makefile) is used to control easy build. If you do
 not want to use it just run the `pankyll` command inside your project
@@ -87,39 +95,31 @@ directory. If you want to use it see the usage section.
 
 **Installation for Debian:**
 
-```bash
-aptitude install make
+```shell
+# aptitude install make
 ```
 
 # Installation
 
 Clone the example repository and its sub-modules
 
-```bash
-git clone --recursive https://github.com/ckuelker/pankyll-theme-rankle-example.git
+```shell
+$ export URL=https://github.com/ckuelker/pankyll-theme-rankle-example.git
+$ git clone --recursive $URL
 ```
 
 # Usage
 
-Build the site
+Update, build and see the site:
 
-```bash
-cd pankyll-theme-rankle-example
-make submodule-update # this takes some time
-make realclean
-make build
-```
-
-Start a server
-
-```bash
-make server
-```
-
-Or shorter:
-
-```bash
-make submodule-update realclean build server
+```shell
+$ cd pankyll-theme-rankle-example
+$ make submodule-update
+$ make submoduleclean
+$ make submodule-pull
+$ make realclean
+$ make build
+$ make server
 ```
 
 Open a browser and access the URL [http://localhost:8001](http://localhost:8001)
