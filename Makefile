@@ -3,9 +3,13 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.5 (change inline)                                            |
+# | Version: 0.1.6 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.6 2020-05-13 Christian Külker <c@c8i.org>                             |
+# |     - clean pankyll.rsync                                                 |
+# |     - rename target linkcheck-local-extern to linkcheck-extern            |
 # |                                                                           |
 # | 0.1.5 2020-04-30 Christian Külker <c@c8i.org>                             |
 # |     - use PORT variable in usage (fixes wrong value)                      |
@@ -102,7 +106,7 @@ publicclean:
 	rm -rf $(DSTD)
 # clean process files
 clean:
-	rm -f pankyll.log pankyll.err pankyll.out
+	rm -f pankyll.log pankyll.err pankyll.out pankyll.rsync
 # the make the submodule clean: WARNING changes will be lost
 submoduleclean:
 	cd pandoc && git checkout master
@@ -156,7 +160,7 @@ linkcheck-local:
 	@echo "Check local links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker $(LINKCHECK_PARAMS)
 	@echo "Links PASS"
-linkcheck-local-extern:
+linkcheck-extern:
 	@echo "Check local and remote links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker --check-extern $(LINKCHECK_PARAMS)
 	@echo "Links PASS"
