@@ -1,6 +1,7 @@
 pankyll.err
 pankyll.log
 pankyll.out
+pankyll.rsync
 public/
 *.swp
 *~
