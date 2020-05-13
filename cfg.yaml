@@ -18,11 +18,16 @@
 #
 # 0: default values
 default:
-    page_type:         doc
-    keyword_page_type: keyword
-    index_list_type:   list
-    l10n_locale:       en_US   # Feature 2: Localization
-    pdf_create:        True
+    page_type:          doc
+    keyword_index_type: title  # Categories/index.md
+    keyword_index_list: list   # Categories/index.md
+    keyword_page_type:  keyword
+    index_list_type:    list
+    l10n_locale:        en_US   # Feature 2: Localization
+    pdf_create:         True
+    css_local:          False
+    js_local:           False
+
 
 # 1. Global site parameters
 site:
@@ -107,6 +112,7 @@ toc:
 #           added that defines 'text' and 'url' in all supported locales.
 keywords:
     - categories
+    - features
     - tags
 
 categories:
@@ -116,6 +122,14 @@ categories:
     de_DE:
         text: Kategorien
         url:  de_DE/Categories/
+
+features:
+    en_US:
+        text: Features
+        url:  en_US/Features/
+    de_DE:
+        text: Features
+        url:  de_DE/Freatures/
 
 tags:
     en_US:
@@ -132,12 +146,18 @@ more:
             text: Categories
             url:  en_US/Categories/
         - link:
+            text: Features
+            url:  en_US/Features/
+        - link:
             text: Tags
             url:  en_US/Tags/
     de_DE:
         - link:
             text: Kategorien
             url:  de_DE/Categories/
+        - link:
+            text: Features
+            url:  de_DE/Features/
         - link:
             text: Stichworte
             url:  de_DE/Tags/
@@ -155,27 +175,27 @@ description:
 # fab https://fontawesome.com/cheatsheet/free/brands
 footer_left:
     en_US:
-        1:
-            tip: Mailing List
-            font: fa # font awesome solid
-            icon: envelope
-            url:  https://example.org/mail
+#        1:
+#            tip: Mailing List
+#            font: fa # font awesome solid
+#            icon: envelope
+#            url:  https://example.org/mail
         2:
             tip: Twitter
             font: fab # font awesome brands
             icon: twitter
-            url:  https://example.org/mail
+            url:  https://twitter.com/search?q=pankyll&src=typed_query
         3:
             tip:  Stack Overflow
             font: fab
             icon: stack-overflow
-            url:  https://example.org/mail
+            url:  https://stackoverflow.com/search?q=pankyll
     de_DE:
-        1:
-            tip: E-Mail-Liste
-            font: fa # font awesome solid
-            icon: envelope
-            url:  https://example.org/mail
+#        1:
+#            tip: E-Mail-Liste
+#            font: fa # font awesome solid
+#            icon: envelope
+#            url:  https://example.org/mail
         2:
             tip: Twitter
             font: fab # font awesome brands
