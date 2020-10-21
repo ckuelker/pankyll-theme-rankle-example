@@ -1,7 +1,7 @@
 ---
 title:  pankyll-theme-rankle-example/README.md
 author: Christian Külker
-date:   2020-05-13
+date:   2020-10-21
 
 ---
 
@@ -23,6 +23,7 @@ new site.
 
 | Version | Date       | Author           | Notes                             |
 | ------- | ---------- | ---------------- | --------------------------------- |
+| 0.1.2   | 2020-10-21 | Christian Külker | theme version 0.1.3, Makefile     |
 | 0.1.1   | 2020-05-13 | Christian Külker | Makefile, Readme, Features        |
 | 0.1.0   | 2020-03-29 | Christian Külker | Initial release                   |
 
@@ -120,6 +121,11 @@ $ make submodule-pull
 $ make realclean
 $ make build
 $ make server
+```
+Or all at once:
+
+```
+$ make all
 ```
 
 Open a browser and access the URL [http://localhost:8001](http://localhost:8001)

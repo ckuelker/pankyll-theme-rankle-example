@@ -3,9 +3,15 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.6 (change inline)                                            |
+# | Version: 0.1.7 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.7 2020-05-16 Christian Külker <c@c8i.org>                             |
+# |     - add 'all' target                                                    |
+# |     - add check for pankyll binary                                        |
+# |     - add check for pandoc binary                                         |
+# |     - add check for pdflatex binary                                       |
 # |                                                                           |
 # | 0.1.6 2020-05-13 Christian Külker <c@c8i.org>                             |
 # |     - clean pankyll.rsync                                                 |
@@ -41,13 +47,32 @@
 # +---------------------------------------------------------------------------+
 #
 # Makefile version
-VERSION=0.1.5
+VERSION=0.1.7
 PORT=8001
 NS=pankyll-theme-rankle-example
 # -----------------------------------------------------------------------------
 # NO CHANGES BEYOND THIS POINT
 ifndef VERSION
 $(error VERSION is NOT defined)
+endif
+# Test if pankyll is installed and in the PATH
+ifeq (, $(shell which pankyll))
+  $(error "No pankyll in $(PATH), consider installing pankyll")
+else
+  PANKYLL=$(shell which pankyll)
+endif
+# Test if pandoc is installed and in the PATH
+ifeq (, $(shell which pandoc))
+  $(error "No pandoc in $(PATH), consider installing pandoc")
+else
+  PANDOC=$(shell which pandoc)
+endif
+# Test if pdflatex, installed and in the PATH
+# pdflatex is default option ofr pandoc
+ifeq (, $(shell which pdflatex))
+  $(error "No pdflatex in $(PATH), consider installing pdflatex")
+else
+  PDFLATEX=$(shell which pdflatex)
 endif
 HOST=$(shell hostname)
 DSTD=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['site']['public_dir'])")
@@ -81,6 +106,7 @@ usage:
 	@echo "make submodule-pull   : get latest git sub-module update"
 	@echo "make build            : build project"
 	@echo "make server           : start a development server on port $(PORT)"
+	@echo "make all              : update submodules, realclean, build, server"
 info:
 	@echo "NS     : [$(NS)]"
 	@echo "VERSION: [$(VERSION)]"
@@ -156,6 +182,8 @@ server:
 	    cp -a public/* /tmp/$(NS)/$(WDIR);\
 	    cd /tmp/$(NS)/$(DSTD) && python3 -m http.server $(PORT);\
 	fi
+all: submodule-update submoduleclean submodule-pull realclean build server
+
 linkcheck-local:
 	@echo "Check local links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker $(LINKCHECK_PARAMS)
