@@ -5,3 +5,4 @@ pankyll.rsync
 public/
 *.swp
 *~
+tex2pdf*
