@@ -3,9 +3,12 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.7 (change inline)                                            |
+# | Version: 0.1.8 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.8 2021-05-18 Christian Külker <c@c8i.org>                             |
+# |     - unmask pankyll run (better error visibility)                        |
 # |                                                                           |
 # | 0.1.7 2020-05-16 Christian Külker <c@c8i.org>                             |
 # |     - add 'all' target                                                    |
@@ -150,11 +153,10 @@ $(DSTD):
 build: static $(DSTD)
 	@echo "running pankyll - this can take a while (logfile: pankyll.log)"
 	@echo $(L)
-	pankyll 2>pankyll.err|tee -a pankyll.out
+	pankyll
 	@echo $(L)
 	@echo "running pankyll - finished"
 	@echo $(L)
-	@cat pankyll.err
 	sed -i -e 's%=/en_US/index.html%=$(PFX)/$(LOC)/index.html%' $(DSTD)/index.html
 	sed -i -e 's%=//en_US/index.html%=/$(LOC)/index.html%' $(DSTD)/index.html
 repository-update:
