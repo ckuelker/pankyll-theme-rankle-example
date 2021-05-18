@@ -7,13 +7,14 @@
 # |                                                                           |
 # | Changes:                                                                  |
 # |                                                                           |
+# | 0.1.3 2021-05-18 Christian Külker <c@c8i.org>                             |
+# |     - Add feature section                                                 |
+# |     - Add feature top 10                                                  |
 # | 0.1.2 2021-05-15 Christian Külker <c@c8i.org>                             |
 # |     - Bump copyright year                                                 |
-# |                                                                           |
 # | 0.1.1 2020-04-23 Christian Külker <c@c8i.org>                             |
 # |     - Change pdf_create to True                                           |
 # |     - Fix comments, typos                                                 |
-# |                                                                           |
 # | 0.1.0 2020-03-29 Christian Külker <c@c8i.org>                             |
 # |     - Initial release                                                     |
 # |                                                                           |
@@ -27,10 +28,14 @@ default:
     keyword_page_type:  keyword
     index_list_type:    list
     l10n_locale:        en_US   # Feature 2: Localization
+    top10_left:         True
+    top10_right:        True
+
+feature:
     pdf_create:         True
     css_local:          False
     js_local:           False
-
+    top10:              True
 
 # 1. Global site parameters
 site:
