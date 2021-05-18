@@ -1,7 +1,7 @@
 ---
 title:  pankyll-theme-rankle-example/README.md
 author: Christian Külker
-date:   2021-05-15 
+date:   2021-05-18
 
 ---
 
@@ -21,12 +21,14 @@ new site.
 
 # Changes
 
-| Version | Date       | Author           | Notes                             |
-| ------- | ---------- | ---------------- | --------------------------------- |
-| 0.1.3   | 2021-05-15 | Christian Külker | pankyll-documentation 0.1.6       |
-| 0.1.2   | 2020-10-21 | Christian Külker | theme version 0.1.3, Makefile     |
-| 0.1.1   | 2020-05-13 | Christian Külker | Makefile, Readme, Features        |
-| 0.1.0   | 2020-03-29 | Christian Külker | Initial release                   |
+| Version | Date       | Notes                                                |
+| ------- | ---------- | ---------------------------------------------------- |
+| 0.1.4   | 2021-05-18 | pankyll-documentation 0.1.7, update cfg.yaml,        |
+|         |            | top 10 feature, improve Makefile                     |
+| 0.1.3   | 2021-05-15 | pankyll-documentation 0.1.6                          |
+| 0.1.2   | 2020-10-21 | theme version 0.1.3, Makefile                        |
+| 0.1.1   | 2020-05-13 | Makefile, Readme, Features                           |
+| 0.1.0   | 2020-03-29 | Initial release                                      |
 
 # Introduction
 
