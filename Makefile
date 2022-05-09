@@ -3,56 +3,62 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.8 (change inline)                                            |
+# | Version: 0.1.9 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.9 2022-05-09 Christian Külker <c@c8i.org>                             |
+# |     - Add THEME                                                           |
+# |     - Add repository-update to .PHONY                                     |
+# |     - clean will not remove pankyll.err and pankyll.out                   |
 # |                                                                           |
 # | 0.1.8 2021-05-18 Christian Külker <c@c8i.org>                             |
 # |     - unmask pankyll run (better error visibility)                        |
 # |                                                                           |
 # | 0.1.7 2020-05-16 Christian Külker <c@c8i.org>                             |
-# |     - add 'all' target                                                    |
-# |     - add check for pankyll binary                                        |
-# |     - add check for pandoc binary                                         |
-# |     - add check for pdflatex binary                                       |
+# |     - Add 'all' target                                                    |
+# |     - Add check for pankyll binary                                        |
+# |     - Add check for pandoc binary                                         |
+# |     - Add check for pdflatex binary                                       |
 # |                                                                           |
 # | 0.1.6 2020-05-13 Christian Külker <c@c8i.org>                             |
-# |     - clean pankyll.rsync                                                 |
-# |     - rename target linkcheck-local-extern to linkcheck-extern            |
+# |     - Clean pankyll.rsync                                                 |
+# |     - Rename target linkcheck-local-extern to linkcheck-extern            |
 # |                                                                           |
 # | 0.1.5 2020-04-30 Christian Külker <c@c8i.org>                             |
-# |     - use PORT variable in usage (fixes wrong value)                      |
+# |     - Use PORT variable in usage (fixes wrong value)                      |
 # |                                                                           |
 # | 0.1.4 2020-04-29 Christian Külker <c@c8i.org>                             |
-# |     - fix server target for simple url prefix                             |
-# |     - fix build index.html for simple url prefix                          |
+# |     - Fix server target for simple url prefix                             |
+# |     - Fix build index.html for simple url prefix                          |
 # |                                                                           |
 # | 0.1.3 2020-04-28 Christian Külker <c@c8i.org>                             |
-# |     - add more phony targets                                              |
-# |     - read configuration partly from cfg.yaml                             |
-# |     - build example root index.html                                       |
-# |     - server target supports URL prefix                                   |
-# |     - fix URL for root index.html for prefix /                            |
+# |     - Add more phony targets                                              |
+# |     - Read configuration partly from cfg.yaml                             |
+# |     - Build example root index.html                                       |
+# |     - Server target supports URL prefix                                   |
+# |     - Fix URL for root index.html for prefix /                            |
 # |                                                                           |
 # | 0.1.2 2020-04-23 Christian Külker <c@c8i.org>                             |
-# |     - fix sub module update                                               |
-# |     - fix makefile version                                                |
-# |     - add submodule clean target                                          |
-# |     - add submodule-pull target                                           |
+# |     - Fix sub module update                                               |
+# |     - Fix makefile version                                                |
+# |     - Add submodule clean target                                          |
+# |     - Add submodule-pull target                                           |
 # |                                                                           |
 # | 0.1.1 2020-03-29 Christian Külker <c@c8i.org>                             |
-# |     - capture pankyll output: pankyll.err, pankyll.out, pankyll.log       |
-# |     - clean: removes pankyll.err, pankyll.out, pankyll.log                |
+# |     - Capture pankyll output: pankyll.err, pankyll.out, pankyll.log       |
+# |     - Clean: removes pankyll.err, pankyll.out, pankyll.log                |
 # |                                                                           |
 # | 0.1.0 2020-03-17 Christian Külker <c@c8i.org>                             |
-# |     - initial release                                                     |
+# |     - Initial release                                                     |
 # |                                                                           |
 # +---------------------------------------------------------------------------+
 #
 # Makefile version
-VERSION=0.1.7
+THEME:=rankle
+VERSION=0.1.9
 PORT=8001
-NS=pankyll-theme-rankle-example
+NS=pankyll-theme-$(THEME)-example
 # -----------------------------------------------------------------------------
 # NO CHANGES BEYOND THIS POINT
 ifndef VERSION
@@ -71,16 +77,21 @@ else
   PANDOC=$(shell which pandoc)
 endif
 # Test if pdflatex, installed and in the PATH
-# pdflatex is default option ofr pandoc
+# pdflatex is default option for pandoc
 ifeq (, $(shell which pdflatex))
   $(error "No pdflatex in $(PATH), consider installing pdflatex")
 else
   PDFLATEX=$(shell which pdflatex)
 endif
 HOST=$(shell hostname)
-DSTD=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['site']['public_dir'])")
-PFX=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['site']['url'])")
-LOC=$(shell python3 -c "import yaml;print(yaml.load(open('cfg.yaml'))['default']['l10n_locale'])")
+# Python yaml 5.1 require Loader= parameter, see
+# https://github.com/yaml/pyyaml/wiki/PyYAML-yaml.load(input)-Deprecation
+# python3 -c "import yaml;print(yaml.load(open('cfg.yaml'), Loader=yaml.SafeLoader)['site']['public_dir'])"
+PYB :=  python3 -c "import yaml;print(yaml.load(open('cfg.yaml'), Loader=yaml.SafeLoader)['
+PYE := '])"
+DSTD=$(shell $(PYB)site']['public_dir$(PYE))
+PFX=$(shell $(PYB)site']['url$(PYE))
+LOC=$(shell $(PYB)default']['l10n_locale$(PYE))
 PFXDIR=$(shell echo "$(PFX)"|sed -e 's%^/%%')
 NPROC=$(shell nproc)
 WDIR=$(shell echo $(DSTD) $(PFXDIR)|tr ' ' '/') # public | public/PFXDIR
@@ -91,7 +102,8 @@ LINKCHECK_SERVER:=http://localhost:$(PORT)
 LINKCHECK_PARAMS:=--no-status --ignore-url=$(LINKCHECK_IGNORE) -o blacklist $(LINKCHECK_SERVER)
 L:=============================================================================
 .PHONY: build clean htmlclean info markdownclean pdfclean realclean server \
-	submodule-update test usage submoduleclean submodule-pull
+	submodule-update test usage submoduleclean submodule-pull \
+	repository-update
 usage:
 	@echo "$(L)"
 	@echo "USAGE:"
@@ -103,10 +115,11 @@ usage:
 	@echo "make htmlclean        : remove all *.html from target (debug)"
 	@echo "make pdfclean         : remove all *.pdf from target (debug)"
 	@echo "make submoduleclean   : remove all changes from content, pandoc"
-	@echo "                        and themes/pankyll-theme-rankle"
+	@echo "                        and themes/pankyll-theme-$(THEME)"
 	@echo "make realclean        : remove target"
 	@echo "make submodule-update : update git sub-modules configuration"
 	@echo "make submodule-pull   : get latest git sub-module update"
+	@echo "make repository-update: update git repository"
 	@echo "make build            : build project"
 	@echo "make server           : start a development server on port $(PORT)"
 	@echo "make all              : update submodules, realclean, build, server"
@@ -135,12 +148,12 @@ publicclean:
 	rm -rf $(DSTD)
 # clean process files
 clean:
-	rm -f pankyll.log pankyll.err pankyll.out pankyll.rsync
+	rm -f pankyll.log pankyll.rsync
 # the make the submodule clean: WARNING changes will be lost
 submoduleclean:
 	cd pandoc && git checkout master
 	cd content && git checkout master
-	cd themes/pankyll-theme-rankle && git checkout master
+	cd themes/pankyll-theme-$(THEME) && git checkout master
 # clean build target
 realclean: clean publicclean
 test:
@@ -164,12 +177,12 @@ repository-update:
 submodule-update:
 	git submodule update --remote
 	git submodule update --init --recursive --jobs $(NPROC)
-	cd themes/pankyll-theme-rankle && git submodule update --remote
-	cd themes/pankyll-theme-rankle && git submodule update --init --recursive --jobs $(NPROC)
+	cd themes/pankyll-theme-$(THEME) && git submodule update --remote
+	cd themes/pankyll-theme-$(THEME) && git submodule update --init --recursive --jobs $(NPROC)
 submodule-pull:
 	cd pandoc && git pull
 	cd content && git pull
-	cd themes/pankyll-theme-rankle && git pull
+	cd themes/pankyll-theme-$(THEME) && git pull
 server:
 	@if [ "$(PFX)" = "/" ]; then \
 	    echo "$(L)\nhttp://localhost:$(PORT)\nhttp://${HOST}:$(PORT)\n$(L)"; \
@@ -185,7 +198,6 @@ server:
 	    cd /tmp/$(NS)/$(DSTD) && python3 -m http.server $(PORT);\
 	fi
 all: submodule-update submoduleclean submodule-pull realclean build server
-
 linkcheck-local:
 	@echo "Check local links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker $(LINKCHECK_PARAMS)
@@ -194,4 +206,3 @@ linkcheck-extern:
 	@echo "Check local and remote links via $(LINKCHECK_SERVER), will report broken links"
 	linkchecker --check-extern $(LINKCHECK_PARAMS)
 	@echo "Links PASS"
-
