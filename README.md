@@ -1,8 +1,8 @@
 ---
 title: pankyll-theme-rankle-example/README.md
 author: Christian Külker
-version: 0.1.5
-date: 2022-05-09
+version: 0.1.6
+date: 2022-05-19
 
 ---
 
@@ -25,6 +25,7 @@ used as a base to build up a new site.
 
 | Version | Date       | Notes                                                |
 | ------- | ---------- | ---------------------------------------------------- |
+| 0.1.6   | 2022-05-19 | Makefile, bump copyright cfg.yaml, shell->bash       |
 | 0.1.5   | 2022-05-09 | Improve Makefile, pankyll-documentation 0.1.8        |
 | 0.1.4   | 2021-05-18 | pankyll-documentation 0.1.7, update cfg.yaml,        |
 |         |            | top 10 feature, improve Makefile                     |
@@ -48,13 +49,13 @@ Requires [Pankyll] and on [Debian] install the following:
 
 As root
 
-```shell
+```bash
 aptitude install pandoc fonts-noto-cjk fonts-wqy-microhei make
 ```
 
 As user
 
-```shell
+```bash
 export URL=https://github.com/ckuelker/pankyll-theme-rankle-example.git
 git clone --recursive $URL
 ```
@@ -72,7 +73,7 @@ with version 2.2.1 and should give good results.
 
 **Installation for Debian:**
 
-```shell
+```bash
 aptitude install pandoc
 ```
 
@@ -88,7 +89,7 @@ future releases.
 
 **Installation for Debian:**
 
-```shell
+```bash
 aptitude install fonts-noto-cjk fonts-wqy-microhei
 ```
 
@@ -100,7 +101,7 @@ directory. If you want to use it see the usage section.
 
 **Installation for Debian:**
 
-```shell
+```bash
 aptitude install make
 ```
 
@@ -108,7 +109,7 @@ aptitude install make
 
 Clone the example repository and its sub-modules
 
-```shell
+```bash
 export URL=https://github.com/ckuelker/pankyll-theme-rankle-example.git
 git clone --recursive $URL
 ```
@@ -117,7 +118,7 @@ git clone --recursive $URL
 
 Update, build and see the site:
 
-```shell
+```bash
 cd pankyll-theme-rankle-example
 make submodule-update
 make submoduleclean
@@ -129,7 +130,7 @@ make server
 
 Or all at once:
 
-```shell
+```bash
 make all
 ```
 
@@ -141,7 +142,7 @@ Open a browser and access the URL [http://localhost:8001](http://localhost:8001)
 
 # License And Copyright
 
-    Copyright (C) 2020, 2022 by Christian Kuelker, see LICENSE file.
+    Copyright (C) 2020, 2021, 2022 by Christian Kuelker, see LICENSE file.
 
 [Debian]: https://www.debian.org/
 [Newspaper]: https://github.com/ckuelker/pankyll-theme-newspaper/
