@@ -3,9 +3,12 @@
 # |                                                                           |
 # | Pankyll-Theme-Rankle-Example                                              |
 # |                                                                           |
-# | Version: 0.1.9 (change inline)                                            |
+# | Version: 0.2.0 (change inline)                                            |
 # |                                                                           |
 # | Changes:                                                                  |
+# |                                                                           |
+# | 0.2.0 2022-05-19 Christian Külker <c@c8i.org>                             |
+# |     - Checkout submodule current branch (avoid detached HEAD)             |
 # |                                                                           |
 # | 0.1.9 2022-05-09 Christian Külker <c@c8i.org>                             |
 # |     - Add THEME                                                           |
@@ -180,9 +183,9 @@ submodule-update:
 	cd themes/pankyll-theme-$(THEME) && git submodule update --remote
 	cd themes/pankyll-theme-$(THEME) && git submodule update --init --recursive --jobs $(NPROC)
 submodule-pull:
-	cd pandoc && git pull
-	cd content && git pull
-	cd themes/pankyll-theme-$(THEME) && git pull
+	cd pandoc && git checkout master && git pull
+	cd content && git checkout master && git pull
+	cd themes/pankyll-theme-$(THEME) && git checkout master && git pull
 server:
 	@if [ "$(PFX)" = "/" ]; then \
 	    echo "$(L)\nhttp://localhost:$(PORT)\nhttp://${HOST}:$(PORT)\n$(L)"; \
