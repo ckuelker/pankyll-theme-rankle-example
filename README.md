@@ -1,8 +1,8 @@
 ---
 title: pankyll-theme-rankle-example/README.md
 author: Christian Külker
-version: 0.1.6
-date: 2022-05-19
+version: 0.1.7
+date: 2022-05-26
 
 ---
 
@@ -25,6 +25,8 @@ used as a base to build up a new site.
 
 | Version | Date       | Notes                                                |
 | ------- | ---------- | ---------------------------------------------------- |
+| 0.1.7   | 2022-05-26 | pankyll-documentation 0.2.0, Improve info tgt,       |
+|         |            | +update tgt, +submoduleclean dep g.yaml, shell->bash |
 | 0.1.6   | 2022-05-19 | Makefile, bump copyright cfg.yaml, shell->bash       |
 | 0.1.5   | 2022-05-09 | Improve Makefile, pankyll-documentation 0.1.8        |
 | 0.1.4   | 2021-05-18 | pankyll-documentation 0.1.7, update cfg.yaml,        |
