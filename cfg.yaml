@@ -3,10 +3,13 @@
 # |                                                                           |
 # | This is the Pankyll configuration for the project site.                   |
 # |                                                                           |
-# | Version: 0.1.4                                                            |
+# | Version: 0.1.5                                                            |
 # |                                                                           |
 # | Changes:                                                                  |
 # |                                                                           |
+# | 0.1.5 2023-03-15 Christian Külker <c@c8i.org>                             |
+# |     - Remove empty lines                                                  |
+# |     - Bump copyright                                                      |
 # | 0.1.4 2021-05-18 Christian Külker <c@c8i.org>                             |
 # |     - Makefile: add checkout (to mitigate detached HEAD)                  |
 # |     - Bump copyright                                                      |
@@ -276,10 +279,8 @@ footer_right:
             url:  https://github.com/ckuelker/pankyll-theme-rankle-example
 footer:
     en_US:
-        - text: © 2020, 2021, 2022 Christian Külker, All Rights Reserved
+        - text: © 2020 - 2023 Christian Külker, All Rights Reserved
         - text: 'Content license: <a class="rankle-link-dark" href="/en_US/License">GNU Free Document License v1.3</a>'
     de_DE:
-        - text: © 2020, 2021, 2022 Christian Külker, alle Rechte vorbehalten
+        - text: © 2020 - 2023 Christian Külker, alle Rechte vorbehalten
         - text: 'Inhaltslizenz: <a class="rankle-link-dark" href="/en_US/License">GNU Free Document License v1.3</a>'
-
-
