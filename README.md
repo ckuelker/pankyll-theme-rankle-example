@@ -1,19 +1,18 @@
 ---
 title: pankyll-theme-rankle-example/README.md
 author: Christian Külker
-version: 0.1.7
-date: 2022-05-26
+version: 0.1.8
+date: 2023-03-16
 
 ---
 
 # Abstract
 
-This document describes briefly the aim and content of the
-`pankyll-theme-rankle-example` repository.
-
-The goal of this repository is to show the configuration and usage of the
-theme [Rankle] by providing a working example with a directory tree that can be
-used as a base to build up a new site.
+This document briefly describes the purpose and contents of the
+`pankyll-theme-rankle-example` repository. The goal of this repository is to
+show the configuration and usage of the theme [Rankle] by providing a working
+example with a directory tree that can be used as a base for building a new
+site.
 
 ![Github license](https://img.shields.io/github/license/ckuelker/pankyll-theme-rankle-example.svg)
 ![Github issues](https://img.shields.io/github/issues/ckuelker/pankyll-theme-rankle-example.svg?style=popout-square)
@@ -25,6 +24,8 @@ used as a base to build up a new site.
 
 | Version | Date       | Notes                                                |
 | ------- | ---------- | ---------------------------------------------------- |
+| 0.1.8   | 2023-03-16 | pankyll-pandoc 0.1.3, pankyll-documentation 0.2.1,   |
+|         |            | pankyll-theme-rankle 0.1.8, Improve writing          |
 | 0.1.7   | 2022-05-26 | pankyll-documentation 0.2.0, Improve info tgt,       |
 |         |            | +update tgt, +submoduleclean dep g.yaml, shell->bash |
 | 0.1.6   | 2022-05-19 | Makefile, bump copyright cfg.yaml, shell->bash       |
@@ -39,9 +40,9 @@ used as a base to build up a new site.
 # Introduction
 
 More than a 1000 words, a life example can show how things are done the right
-away. This [Pankyll] theme [rankle] example is a pre-configured [Pankyll] theme
-with a little bit of content to see how easy it is to set up a [Pankyll] site
-with a [rankle] theme.
+way. This [Pankyll] theme [rankle] example is a pre-configured [Pankyll] theme
+with a little content to see how easy it is to set up a [Pankyll] site with a
+[rankle] theme.
 
 # Prerequisites
 
@@ -65,13 +66,14 @@ git clone --recursive $URL
 ## Pankyll
 
 We assume that [Pankyll] is installed and that the script `pankyll` is in your
-`PATH`. Read the [Pankyll] `README.md` for more information.
+`PATH`. See the Pankyll `README.md` file for more information.
 
 ## Pandoc
 
 [Pandoc] is expected to be installed. While it is possible to run `pankyll`
-with `pandoc` 1.x.x it will not produce good results. [Pankyll] was tested
-with version 2.2.1 and should give good results.
+with `pandoc` 1.x.x, it will not give good results. [Pankyll] has been tested
+with versions 2.2.1, 2.10.1 and should give good results. Unfortunately Pandoc
+2.18 is not supported at the moment.
 
 **Installation for Debian:**
 
@@ -81,9 +83,10 @@ aptitude install pandoc
 
 ## Fonts
 
-To create PDF files from Markdown, the following fonts seem to produce the best
-results. For [Pankyll] 0.1.0 the names are hard coded, that might change in
+For creating PDF files from Markdown, the following fonts seem to give the best
+results. For [Pankyll] 0.1.0 the names are hard-coded, this may change in
 future releases.
+
 
 * Noto Sans CJK JP
 * Noto Sans Mono CJK JP Bold
@@ -97,9 +100,9 @@ aptitude install fonts-noto-cjk fonts-wqy-microhei
 
 ## Make
 
-An optional control file (Makefile) is used to control easy build. If you do
-not want to use it just run the `pankyll` command inside your project
-directory. If you want to use it see the usage section.
+An optional Makefile is used to control easy build. If you do not want to use
+it, just run the `pankyll` command in your project directory. If you want to
+use it, see the usage section.
 
 **Installation for Debian:**
 
@@ -144,7 +147,7 @@ Open a browser and access the URL [http://localhost:8001](http://localhost:8001)
 
 # License And Copyright
 
-    Copyright (C) 2020, 2021, 2022 by Christian Kuelker, see LICENSE file.
+    Copyright (C) 2020 - 2023 by Christian Kuelker, see LICENSE file.
 
 [Debian]: https://www.debian.org/
 [Newspaper]: https://github.com/ckuelker/pankyll-theme-newspaper/
